@@ -15,6 +15,8 @@ RUN uv sync --frozen
 
 COPY src/ ./src/
 
+COPY run.py .
+
 EXPOSE 8000
 
 CMD ["uv", "run", "python", "run.py"]
