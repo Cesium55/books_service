@@ -7,7 +7,7 @@ from alembic import context
 
 from app.books import models as book_models  # noqa: F401
 from basic_utils.models import Base
-from config import settings
+from basic_utils.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
