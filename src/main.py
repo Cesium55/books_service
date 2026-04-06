@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from basic_utils.config import settings
 from prometheus_fastapi_instrumentator import Instrumentator
 from middleware.timing import TimingMiddleware
+from app.books.routes import router as books_router
 
 
 
@@ -36,6 +37,9 @@ app.add_middleware(
 
 
 Instrumentator().instrument(app).expose(app)
+
+
+app.include_router(books_router)
 
 @app.get("/")
 async def index():
