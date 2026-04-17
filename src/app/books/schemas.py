@@ -21,3 +21,11 @@ class BookReadSchema(BookBaseSchema):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class BookListSchema(BaseModel):
+    id: int
+    title: str
+    author: str
+
+    model_config = ConfigDict(from_attributes=True)

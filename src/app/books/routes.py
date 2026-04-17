@@ -2,7 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.books.manager import BookManager
-from app.books.schemas import BookCreateSchema, BookReadSchema, BookUpdateSchema
+from app.books.schemas import (
+    BookCreateSchema,
+    BookListSchema,
+    BookReadSchema,
+    BookUpdateSchema,
+)
 from basic_utils.database import get_async_session_generator
 
 
@@ -23,12 +28,12 @@ async def create_book(
     return BookReadSchema.model_validate(book)
 
 
-@router.get("/", response_model=list[BookReadSchema])
+@router.get("/", response_model=list[BookListSchema])
 async def get_books(
     session: AsyncSession = Depends(get_async_session_generator),
-) -> list[BookReadSchema]:
+) -> list[BookListSchema]:
     books = await manager.get_books(session)
-    return [BookReadSchema.model_validate(book) for book in books]
+    return [BookListSchema.model_validate(book) for book in books]
 
 
 @router.get("/{book_id}", response_model=BookReadSchema)
